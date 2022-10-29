@@ -27,19 +27,13 @@ class BaseModel():
         if self.model_name not in ['svc', 'logreg']:
             raise TypeError('Select other model: svc or logreg')
 
-        if self.model_name == 'svc':
-            self.model = SVC(**model_params)
-        elif self.model_name == 'logreg':
-            self.model = LogisticRegression(**model_params)
-
-
-        # try:
-        #     if self.model_name == 'svc':
-        #         self.model = SVC(**model_params)
-        #     elif self.model_name == 'logreg':
-        #         self.model = LogisticRegression(**model_params)
-        # except Exception as e:
-        #     raise TypeError(f"Bad params, choose another")
+        try:
+            if self.model_name == 'svc':
+                self.model = SVC(**model_params)
+            elif self.model_name == 'logreg':
+                self.model = LogisticRegression(**model_params)
+        except Exception as e:
+            raise TypeError(f"Bad params, choose another")
 
         try:
             self.df = pd.read_csv("/Users/eandrianova/PycharmProjects/pythonProject5/data/heart.csv")
